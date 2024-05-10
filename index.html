@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikola je trápna</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #5c67f2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4a54e1;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        var currentStep = 1; // Sledujeme, na ktorom kroku sme
+
+        function nextStep() {
+            var userInput = document.getElementById("userInput").value.toLowerCase().trim();
+            var correctAnswers = ["1", "tool", "7", "bombim", "nepoviem", "nech", "kennyho", "ano", "prosim", "prosim", "erik je super"];
+            if (userInput === correctAnswers[currentStep - 1]) {
+                currentStep++;
+                if (currentStep > 11) {
+                    window.location.href = 'https://testokazi.sk/priklady/matematika-riesene-priklady/priklady-pre-7-rocnik/zlomky/riesene-priklady-na-zlozene-zlomky'; // Odkaz na darček
+                } else {
+                    document.getElementById("question").innerText = getQuestion(currentStep);
+                    document.getElementById("userInput").value = ""; // Vyčistiť pole
+                    updateImage(currentStep);
+                }
+            } else {
+                alert("Nesprávna odpoveď, skús to znova.");
+            }
+        }
+
+        function getQuestion(step) {
+            var questions = [
+                "Príklad so zlomkom", // 1
+                "Aká je Erikova obľúbená kapela?", // 2
+                "Príklad rovnica", // 3
+                "Čo robíš?", // 4
+                "Prečo?", // 5
+                "Nech", // 6
+                "Koho v Southparku zabili?", // 7
+                "Chceš už darček?", // 8
+                "Popros", // 9
+                "Ešte raz", // 10
+                "Prepíš túto vetu 'Erik je super'" // 11
+            ];
+            return questions[step - 1];
+        }
+
+        function updateImage(step) {
+            var imagePath = step === 1 || step === 3 ? "path_to_image" + step + ".png" : "";
+            document.getElementById("mathImage").src = imagePath;
+            document.getElementById("mathImage").style.display = imagePath ? "block" : "none";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2 id="question">Príklad so zlomkom (výsledok 1)</h2>
+        <img id="mathImage" src="path_to_image1.png" alt="Matematický príklad" style="display:none;">
+        <input type="text" id="userInput">
+        <button onclick="nextStep()">Odoslať</button>
+    </div>
+</body>
+</html>
